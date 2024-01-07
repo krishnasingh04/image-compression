@@ -1,0 +1,18 @@
+Fitter Status : Failed - Mon Oct 30 20:04:44 2023
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : 2D_Wavelet
+Top-level Entity Name : Wavelet2D
+Family : MAX 10
+Device : 10M08DAF484C8G
+Timing Models : Final
+Total logic elements : 545 / 8,064 ( 7 % )
+    Total combinational functions : 289 / 8,064 ( 4 % )
+    Dedicated logic registers : 512 / 8,064 ( 6 % )
+Total registers : 512
+Total pins : 257 / 250 ( 103 % )
+Total virtual pins : 0
+Total memory bits : 0 / 387,072 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 48 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )
+UFM blocks : 0 / 1 ( 0 % )
+ADC blocks : 0 / 1 ( 0 % )

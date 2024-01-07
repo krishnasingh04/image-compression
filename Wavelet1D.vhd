@@ -1,0 +1,55 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Wavelet1D is
+  Port (
+    in_data : in  STD_LOGIC_VECTOR (63 downto 0);  -- 64-bit input row
+     out_data   : out STD_LOGIC_VECTOR (63 downto 0);  -- Averaging results (L part)
+    clk   : in  STD_LOGIC                         -- Clock signal
+  );
+end Wavelet1D;
+
+architecture Behavioral of Wavelet1D is
+Component Average is
+    Port ( pixel1 : in STD_LOGIC_VECTOR(7 downto 0);
+           pixel2 : in STD_LOGIC_VECTOR(7 downto 0);
+           clk    : in STD_LOGIC;
+           result11 : out STD_LOGIC_VECTOR(7 downto 0));
+end component Average;
+Component Subtract is
+    Port ( pixel1 : in STD_LOGIC_VECTOR(7 downto 0);
+           pixel2 : in STD_LOGIC_VECTOR(7 downto 0);
+           clk    : in STD_LOGIC;
+           result : out STD_LOGIC_VECTOR(7 downto 0));
+end component Subtract;
+--  signal avg_out,sub_out : STD_LOGIC_VECTOR (31 downto 0);
+  signal p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16 : STD_LOGIC_VECTOR (7 downto 0);
+begin
+p1<= in_data(63 downto 56);
+  p2<= in_data(55 downto 48);
+  p3<= in_data(47 downto 40);
+  p4<= in_data(39 downto 32);
+  p5<= in_data(31 downto 24);
+  p6<= in_data(23 downto 16);
+  p7<= in_data(15 downto 8);
+  p8<= in_data(7 downto 0);
+	 Average1: Average port map(pixel1=> p1, pixel2 => p2, clk=> clk, result11=> p16);
+	 Average2: Average port map(pixel1=> p3, pixel2 => p4, clk=> clk, result11=> p15);
+	 Average3: Average port map(pixel1=> p5, pixel2 => p6, clk=> clk, result11=> p14);
+	 Average4: Average port map(pixel1=> p7, pixel2 => p8, clk=> clk, result11=> p13);
+	 Subtract1: Subtract port map(pixel1=> p1, pixel2 => p2, clk=> clk, result=> p12);
+	 Subtract2: Subtract port map(pixel1=> p3, pixel2 => p4, clk=> clk, result=> p11);
+	 Subtract3: Subtract port map(pixel1=> p5, pixel2 => p6, clk=> clk, result=> p10);
+	 Subtract4: Subtract port map(pixel1=> p7, pixel2 => p8, clk=> clk, result=> p9);
+	 
+out_data(63 downto 56) <= p16;
+out_data(55 downto 48) <= p15;
+out_data(47 downto 40) <= p14;
+out_data(39 downto 32) <= p13;
+out_data(31 downto 24) <= p12; 
+out_data(23 downto 16) <= p11;
+out_data(15 downto 8) <= p10;
+out_data(7 downto 0)<= p9; 
+end Behavioral;

@@ -1,0 +1,36 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Wavelet2D is
+  Port (
+    in_data : in  STD_LOGIC_VECTOR (63 downto 0);  -- 64-bit input row
+    LL      : out STD_LOGIC_VECTOR (31 downto 0);  -- Averaging results
+    LH      : out STD_LOGIC_VECTOR (31 downto 0)   -- Subtraction results
+  );
+end Wavelet1D;
+
+architecture Behavioral of Wavelet1D is
+Component Average is
+    port map (
+     pixel1 : in STD_LOGIC_VECTOR(7 downto 0);
+           pixel2 : in STD_LOGIC_VECTOR(7 downto 0);
+           clk    : in STD_LOGIC;
+           rst    : in STD_LOGIC;
+           result : out STD_LOGIC_VECTOR(7 downto 0));
+	end component Average;
+
+  Component Subtract is
+    Port ( pixel1 : in STD_LOGIC_VECTOR(7 downto 0);
+           pixel2 : in STD_LOGIC_VECTOR(7 downto 0);
+           clk    : in STD_LOGIC;
+           rst    : in STD_LOGIC;
+           result : out STD_LOGIC_VECTOR(7 downto 0));
+end component Subtract;
+  signal avg_out : STD_LOGIC_VECTOR (31 downto 0);
+  signal sub_out : STD_LOGIC_VECTOR (31 downto 0);
+begin
+  LL <= avg_out(31 downto 24) & avg_out(23 downto 16);
+  LH <= sub_out(31 downto 24) & sub_out(23 downto 16);
+end Behavioral;

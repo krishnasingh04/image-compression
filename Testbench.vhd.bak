@@ -1,0 +1,30 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity TestBench is 
+end; 
+architecture TB_BEHAVIOR of TestBench is 
+Component Wavelet1D is
+  Port (
+    in_data : in  STD_LOGIC_VECTOR (63 downto 0);  -- 64-bit input row
+    out_data      : out STD_LOGIC_VECTOR (63 downto 0);  -- Averaging results (L part)
+--    H       : out STD_LOGIC_VECTOR (31 downto 0);  -- Subtraction results (H part)
+    clk   : in  STD_LOGIC                         -- Clock signal
+  );
+end component Wavelet1D;
+signal in_data,out_data : std_logic_vector(63 downto 0);
+--signal L,H:  std_logic_vector(31 downto 0);
+signal clk1: std_logic;
+begin
+clock_generate: process
+begin
+clk1 <='0';
+wait for 10 ns;
+clk1 <= '1';
+wait for 10 ns;
+end process;
+--rst1 <='1','0' after 20ns;
+in_data<= "1010101010101010101010101010101010101010101010101010101010101010";
+dut_instance: Wavelet1D port map(in_data,out_data,clk1); 
+end TB_BEHAVIOR;

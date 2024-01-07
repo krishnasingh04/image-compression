@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Mon Oct 30 20:10:14 2023
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : 2D_Wavelet
+Top-level Entity Name : Wavelet2D
+Family : MAX 10
+Total logic elements : 544
+    Total combinational functions : 288
+    Dedicated logic registers : 512
+Total registers : 512
+Total pins : 257
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
+UFM blocks : 0
+ADC blocks : 0
